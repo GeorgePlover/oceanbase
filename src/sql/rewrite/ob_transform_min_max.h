@@ -70,7 +70,14 @@ public:
 private:
   int do_transform(ObSelectStmt *select_stmt);
 
-  int do_minmax_transform(ObSelectStmt *select_stmt);
+  int do_single_minmax_transform(ObSelectStmt *select_stmt);
+
+  int do_multi_minmax_transform(ObSelectStmt *select_stmt);
+
+  int deep_copy_subquery_for_aggr2(const ObSelectStmt &copied_stmt,
+                                  ObRawExpr *aggr_param,
+                                  ObItemType aggr_type,
+                                  ObSelectStmt *&child_stmt);
 
   int deep_copy_subquery_for_aggr(const ObSelectStmt &copied_stmt,
                                   ObRawExpr *aggr_param,
